@@ -21,7 +21,6 @@ public protocol MultiSelectorPickerFormableRow: FormableRow {
     func formDefaultDisplayLabelText() -> String?
 }
 
-// TODO:- enable displayTitle of SelectorPickerItem
 open class MultiSelectorPickerRowFormer<T: UITableViewCell, S>
 : BaseRowFormer<T>, Formable, UpdatableSelectorForm where T: MultiSelectorPickerFormableRow {
     
@@ -73,16 +72,26 @@ open class MultiSelectorPickerRowFormer<T: UITableViewCell, S>
         } else if !selectedRow.compactMap({ $0 }).isEmpty {
             selectedRow
                 .enumerated().forEach { selectorView.selectRow($0.element ?? 0, inComponent: $0.offset, animated: false) }
-            displayLabel?.text = selectedRow.enumerated()
-                .map { $0.element == nil ? "" : pickerItems[$0.offset][$0.element!].title }
-                .joined(separator: delimiter)
+            let selectedTitle = selectedRow.enumerated().map { $0.element == nil ? "" : pickerItems[$0.offset][$0.element!].title }
+            let selectedDisplayTitle = selectedRow.enumerated().map { $0.element == nil ? nil : pickerItems[$0.offset][$0.element!].displayTitle }
+            displayLabel?.text = selectedTitle.joined(separator: delimiter)
+            if !selectedDisplayTitle.compactMap({ $0 }).isEmpty {
+                displayLabel?.attributedText = selectedDisplayTitle.enumerated()
+                    .map { $0.element == nil ? NSAttributedString(string: selectedTitle[$0.offset]) : $0.element! }
+                    .joined(separator: delimiter)
+            }
         } else if !cell.formDefaultSelectedRows().isEmpty {
             self.selectedRow = cell.formDefaultSelectedRows()
             cell.formDefaultSelectedRows()
                 .enumerated().forEach { selectorView.selectRow($0.element, inComponent: $0.offset, animated: false) }
-            displayLabel?.text = cell.formDefaultSelectedRows().enumerated()
-                .map { pickerItems[$0.offset][$0.element].title }
-                .joined(separator: delimiter)
+            let selectedTitle = selectedRow.enumerated().map { $0.element == nil ? "" : pickerItems[$0.offset][$0.element!].title }
+            let selectedDisplayTitle = selectedRow.enumerated().map { $0.element == nil ? nil : pickerItems[$0.offset][$0.element!].displayTitle }
+            displayLabel?.text = selectedTitle.joined(separator: delimiter)
+            if !selectedDisplayTitle.compactMap({ $0 }).isEmpty {
+                displayLabel?.attributedText = selectedDisplayTitle.enumerated()
+                    .map { $0.element == nil ? NSAttributedString(string: selectedTitle[$0.offset]) : $0.element! }
+                    .joined(separator: delimiter)
+            }
         } else {
             if let defaultText = cell.formDefaultDisplayLabelText() {
                 displayLabel?.text = defaultText
@@ -177,7 +186,14 @@ private class Observer<T: UITableViewCell, S>
             
             let cell = selectorPickerRowFormer.cell
             let displayLabel = cell.formDisplayLabel()
-            displayLabel?.text = pickerItems.map { $0?.title ?? "" }.joined(separator: selectorPickerRowFormer.delimiter)
+            let selectedTitle = pickerItems.map { $0?.title ?? "" }
+            let selectedDisplayTitle = pickerItems.map { $0?.displayTitle }
+            displayLabel?.text = selectedTitle.joined(separator: selectorPickerRowFormer.delimiter)
+            if !selectedDisplayTitle.compactMap({ $0 }).isEmpty {
+                displayLabel?.attributedText = selectedDisplayTitle.enumerated()
+                    .map { $0.element == nil ? NSAttributedString(string: selectedTitle[$0.offset]) : $0.element! }
+                    .joined(separator:selectorPickerRowFormer.delimiter)
+            }
             selectorPickerRowFormer.onValueChanged?(pickerItems)
         }
     }
@@ -195,5 +211,18 @@ private class Observer<T: UITableViewCell, S>
     fileprivate dynamic func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let selectorPickerRowFormer = selectorPickerRowFormer else { return nil }
         return selectorPickerRowFormer.pickerItems[component][row].title
+    }
+}
+
+extension Array where Element == NSAttributedString {
+    fileprivate func joined(separator: String) -> NSAttributedString {
+        let mutable = NSMutableAttributedString()
+        enumerated().forEach {
+            mutable.append($0.element)
+            if $0.offset != count - 1 {
+                mutable.append(NSAttributedString(string: separator))
+            }
+        }
+        return mutable
     }
 }
