@@ -74,14 +74,14 @@ open class MultiSelectorPickerRowFormer<T: UITableViewCell, S>
             selectedRow
                 .enumerated().forEach { selectorView.selectRow($0.element ?? 0, inComponent: $0.offset, animated: false) }
             displayLabel?.text = selectedRow.enumerated()
-                .map { $0.element == nil ? "" : pickerItems[$0.element!][$0.offset].title }
+                .map { $0.element == nil ? "" : pickerItems[$0.offset][$0.element!].title }
                 .joined(separator: delimiter)
         } else if !cell.formDefaultSelectedRows().isEmpty {
             self.selectedRow = cell.formDefaultSelectedRows()
             cell.formDefaultSelectedRows()
                 .enumerated().forEach { selectorView.selectRow($0.element, inComponent: $0.offset, animated: false) }
             displayLabel?.text = cell.formDefaultSelectedRows().enumerated()
-                .map { pickerItems[$0.element][$0.offset].title }
+                .map { pickerItems[$0.offset][$0.element].title }
                 .joined(separator: delimiter)
         } else {
             if let defaultText = cell.formDefaultDisplayLabelText() {
