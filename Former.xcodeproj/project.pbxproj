@@ -52,6 +52,7 @@
 		2AA777A91BED099000900B01 /* CustomViewFormer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA777A81BED099000900B01 /* CustomViewFormer.swift */; };
 		2AA795621BBC3A4D005949B9 /* BaseRowFormer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA795611BBC3A4D005949B9 /* BaseRowFormer.swift */; };
 		2AF88D8F1BD92B8B00CFFDAC /* FormerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF88D8E1BD92B8B00CFFDAC /* FormerProtocol.swift */; };
+		EB3282E221F4A28C000F1A29 /* MultiSelectorPickerRowFormer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3282E121F4A28C000F1A29 /* MultiSelectorPickerRowFormer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		2AA777A81BED099000900B01 /* CustomViewFormer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewFormer.swift; sourceTree = "<group>"; };
 		2AA795611BBC3A4D005949B9 /* BaseRowFormer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRowFormer.swift; sourceTree = "<group>"; };
 		2AF88D8E1BD92B8B00CFFDAC /* FormerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormerProtocol.swift; sourceTree = "<group>"; };
+		EB3282E121F4A28C000F1A29 /* MultiSelectorPickerRowFormer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectorPickerRowFormer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				2A65660C1BA4427D00C78E81 /* DatePickerRowFormer.swift */,
 				2A65660D1BA4427D00C78E81 /* InlineDatePickerRowFormer.swift */,
 				2A65660E1BA4427D00C78E81 /* InlinePickerRowFormer.swift */,
+				EB3282E121F4A28C000F1A29 /* MultiSelectorPickerRowFormer.swift */,
 				2A65660F1BA4427D00C78E81 /* PickerRowFormer.swift */,
 				2A6566111BA4427D00C78E81 /* SegmentedRowFormer.swift */,
 				2A6566121BA4427D00C78E81 /* SelectorDatePickerRowFormer.swift */,
@@ -321,6 +324,7 @@
 				2A6566461BA4427D00C78E81 /* TextViewRowFormer.swift in Sources */,
 				2A6566341BA4427D00C78E81 /* FormViewController.swift in Sources */,
 				2A6566281BA4427D00C78E81 /* FormSelectorPickerCell.swift in Sources */,
+				EB3282E221F4A28C000F1A29 /* MultiSelectorPickerRowFormer.swift in Sources */,
 				2A6566321BA4427D00C78E81 /* SectionFormer.swift in Sources */,
 				2A6566411BA4427D00C78E81 /* SliderRowFormer.swift in Sources */,
 				2A6566291BA4427D00C78E81 /* FormSliderCell.swift in Sources */,

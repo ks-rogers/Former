@@ -515,3 +515,6 @@ Click [HERE](https://github.com/ra1028/Former/issues/new?template=feature_reques
 
 ## License
 Former is available under the MIT license. See the LICENSE file for more info.
+
+## 変更点
+SelectorPickerRowにおいて、複数選択ができるFormerの作成
